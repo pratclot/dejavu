@@ -138,7 +138,7 @@ class Dejavu:
                 self.limit,
                 song_name=song_name
             )
-            sid = self.db.insert_song(song_name, file_hash)
+            sid = self.db.insert_song(song_name, file_hash, len(hashes))
 
             self.db.insert_hashes(sid, hashes)
             self.db.set_song_fingerprinted(sid)
@@ -226,7 +226,7 @@ class Dejavu:
         return r.recognize(*options, **kwoptions)
 
     @staticmethod
-    def _fingerprint_worker(arguments):
+    def _fingerprint_worker(*arguments, **kwargs):
         # Pool.imap sends arguments as tuples so we have to unpack
         # them ourself.
         try:

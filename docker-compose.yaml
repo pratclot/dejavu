@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    restart: unless-stopped
+#    network_mode: host
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: dejavu
+    ports:
+      - 3306:3306
+    volumes:
+    - mysql:/var/lib/mysql
+#    - mysql-socket:/var/run/mysqld
+    - mysql-config:/etc/mysql
+
+volumes:
+  mysql:
+    external: true
+#  mysql-socket:
+#    external: true
+  mysql-config:
+    external: true

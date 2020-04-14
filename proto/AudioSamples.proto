@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package demo;
+
+service AudioSample {
+  rpc searchSample (stream gAudioSample) returns (gTune) {}
+  rpc test(gTune) returns (gTune) {}
+  rpc play_remotely(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc clean_remote(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc recognize(google.protobuf.Empty) returns (gTune) {}
+}
+
+message gAudioSample {
+  bytes audio_sample = 1;
+}
+
+message gTune {
+  string name = 1;
+}
